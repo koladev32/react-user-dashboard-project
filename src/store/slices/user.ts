@@ -5,7 +5,7 @@ import API_URL from "../../config";
 
 const fetchUsers = createAsyncThunk(
     "users/fetchUsers", async (): Promise<User[]> => {
-        const response = await axios.get(`${API_URL}/users`);
+        const response = await axios.get(`${API_URL}/users/`);
         return response.data;
     }
 );
