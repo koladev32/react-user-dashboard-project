@@ -17,7 +17,7 @@ const addUser = createAsyncThunk("users/addUser", async (user: User) => {
 });
 
 const updateUser = createAsyncThunk("users/updateUser", async (user: User) => {
-  const res = await axios.put(`${API_URL}/${user.id}`, user);
+  const res = await axios.put(`${API_URL}/users/${user.id}`, user);
   return res.data;
 });
 

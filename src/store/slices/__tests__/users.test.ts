@@ -1,4 +1,4 @@
-import reducer, { initialState, findUserById, fetchUsers, addUser } from "../user";
+import reducer, { initialState, findUserById, fetchUsers, addUser, updateUser } from "../user";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { store } from "../..";
@@ -14,6 +14,17 @@ const getUserResponse = {
   phone: "1-770-736-8031 x56442",
   website: "hildegard.org",
 };
+
+const getUserUpdateResponse = {
+    id: 1,
+    name: "John Graham",
+    username: "Bret",
+    email: "Sincere@april.biz",
+    city: "Gwenborough",
+    phone: "1-770-736-8031 x56442",
+    website: "hildegard.org",
+  };
+  
 
 const getCreateUserResponse = {
     id: 3,
@@ -50,7 +61,8 @@ const mockNetWorkResponse = () => {
   const mock = new MockAdapter(axios);
   mock.onGet(`/users/?id=${userId}`).reply(200, getUserResponse);
   mock.onGet(`/users/`).reply(200, getUserListResponse);
-    mock.onPost(`/users/`).reply(200, getCreateUserResponse);
+  mock.onPost(`/users/`).reply(200, getCreateUserResponse);
+  mock.onPut(`/users/${userId}`).reply(200, getUserUpdateResponse);
 };
 
 /**
@@ -121,7 +133,7 @@ describe("List all users", () => {
       mockNetWorkResponse();
     });
   
-    it("Should be able to fetch the user list", async () => {
+    it("Should be able to create a new user", async () => {
       // Saving previous state
       const previousState = store.getState().users;
 
@@ -143,5 +155,34 @@ describe("List all users", () => {
   
       expect(state.users).toEqual(previousUsers);
     });
+  });
+  
+  /**
+ * Testing the updateUser thunk
+ */
+
+ describe("Update a user", () => {
+    beforeAll(() => {
+      mockNetWorkResponse();
+    });
+  
+    it("Should be able to update a user", async () => {
+      // Saving previous user
+      const previousUserState = await store.dispatch(findUserById(userId));
+
+      const previousUser = previousUserState.payload;
+    
+      expect(previousUserState.type).toBe("users/findUserById/fulfilled");
+
+      // Dispatching the action
+
+      const result = await store.dispatch(updateUser(getUserUpdateResponse));
+      const user = result.payload;
+
+      expect(result.type).toBe("users/updateUser/fulfilled");
+    
+      expect(user).toEqual(getUserUpdateResponse);
+      expect(user).not.toEqual(previousUser);
+      });
   });
   
