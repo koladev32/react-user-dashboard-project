@@ -1,4 +1,4 @@
-import reducer, { initialState, findUserById, fetchUsers, addUser, updateUser } from "../user";
+import reducer, { initialState, findUserById, fetchUsers, addUser, updateUser, deleteUser } from "../user";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { store } from "../..";
@@ -63,6 +63,7 @@ const mockNetWorkResponse = () => {
   mock.onGet(`/users/`).reply(200, getUserListResponse);
   mock.onPost(`/users/`).reply(200, getCreateUserResponse);
   mock.onPut(`/users/${userId}`).reply(200, getUserUpdateResponse);
+  mock.onDelete(`/users/${userId}`).reply(200);
 };
 
 /**
@@ -186,3 +187,36 @@ describe("List all users", () => {
       });
   });
   
+
+   /**
+ * Testing the deleteUser thunk
+ */
+
+ describe("Delete a user", () => {
+    beforeAll(() => {
+      mockNetWorkResponse();
+    });
+  
+    it("Should be able to delete a user", async () => {
+      // Saving previous state
+      const previousState = store.getState().users;
+
+      const previousUsers = [
+          ...previousState.users
+      ];
+
+      // Dispatching the action
+
+      const result = await store.dispatch(deleteUser(getUserResponse));
+  
+      const user = result.payload;
+
+      expect(result.type).toBe("users/deleteUser/fulfilled");
+      expect(user).toEqual(getUserResponse);
+  
+      const state = store.getState().users;
+  
+      expect(state.users).not.toEqual(previousUsers);
+      expect(state.users).toEqual(previousUsers.filter(user => user.id !== getUserResponse.id));
+      });
+  });

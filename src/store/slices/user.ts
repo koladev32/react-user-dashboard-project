@@ -22,8 +22,8 @@ const updateUser = createAsyncThunk("users/updateUser", async (user: User) => {
 });
 
 const deleteUser = createAsyncThunk("users/deleteUser", async (user: User) => {
-  const res = await axios.delete(`${API_URL}/${user.id}`);
-  return res.data;
+  await axios.delete(`${API_URL}/users/${user.id}`);
+  return user;
 });
 
 const findUserById = createAsyncThunk(
