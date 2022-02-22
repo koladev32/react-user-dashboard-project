@@ -1,11 +1,21 @@
 import React from "react";
 import { Provider } from "react-redux";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { AddUser, ListUsers, UpdateUser } from "./pages";
+import NotFound from "./pages/NotFound";
 import { store } from "./store";
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">User details</div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ListUsers />} />
+          <Route path="/add" element={<AddUser />} />
+          <Route path="/update/:id/" element={<UpdateUser />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </Provider>
   );
 }
