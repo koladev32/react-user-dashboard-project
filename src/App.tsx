@@ -1,8 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import { AddUser, ListUsers, UpdateUser } from "./pages";
-import NotFound from "./pages/NotFound";
+import { AddUser, ListUsers, UpdateUser, NotFound } from "./pages";
 import { store } from "./store";
 
 function App() {
