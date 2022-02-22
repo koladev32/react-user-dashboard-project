@@ -8,12 +8,14 @@ import * as yup from "yup";
 import { addUser } from "../../store/slices/user";
 import { useAppDispatch } from "../../store";
 
-const addUserSchema = yup.object({
-  name: yup.string().required("Name is required"),
-  email: yup.string().email().required("Email is required"),
-  username: yup.string(),
-  city: yup.string(),
-}).required();
+const addUserSchema = yup
+  .object({
+    name: yup.string().required("Name is required"),
+    email: yup.string().email().required("Email is required"),
+    username: yup.string(),
+    city: yup.string(),
+  })
+  .required();
 
 interface IAddUserFormProps {
   name: string;
@@ -42,7 +44,8 @@ const AddUserForm = () => {
       city: form.city,
     };
 
-    dispatch(addUser(data)).unwrap()
+    dispatch(addUser(data))
+      .unwrap()
       .then(() => {
         navigate("/");
       })
@@ -54,7 +57,7 @@ const AddUserForm = () => {
   return (
     <div>
       <form className="m-4 mx-6">
-        <div style={{ display: "flex", flexDirection: "row"}}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <div className="w-1/2">
             <TextField
               {...register("name", {
@@ -81,10 +84,12 @@ const AddUserForm = () => {
               required
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
-            {errors.email && <div className="text-danger">{errors.email.message}</div>}
+            {errors.email && (
+              <div className="text-danger">{errors.email.message}</div>
+            )}
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "row"}}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <div className="m-1">
             <TextField
               label="Username"

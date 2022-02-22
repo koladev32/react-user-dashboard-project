@@ -1,20 +1,21 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { addUser, findUserById, updateUser } from "../../store/slices/user";
+import { findUserById, updateUser } from "../../store/slices/user";
 import { RootState, useAppDispatch } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 
-const addUserSchema = yup.object({
-  name: yup.string().required("Name is required"),
-  email: yup.string().email().required("Email is required"),
-  username: yup.string(),
-  city: yup.string(),
-}).required();
+const addUserSchema = yup
+  .object({
+    name: yup.string().required("Name is required"),
+    email: yup.string().email().required("Email is required"),
+    username: yup.string(),
+    city: yup.string(),
+  })
+  .required();
 
 interface IAddUserFormProps {
   name: string;
@@ -24,8 +25,7 @@ interface IAddUserFormProps {
 }
 
 const UpdateUserForm = () => {
-  const { id } = useParams();
-  console.log(id);
+  const { id } = useParams() as unknown as { id: number };
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const appDispatch = useAppDispatch();
@@ -37,15 +37,15 @@ const UpdateUserForm = () => {
   } = useForm<IAddUserFormProps>({
     resolver: yupResolver(addUserSchema),
   });
-  const { selectedUser, loading } = useSelector((state: RootState) => state.users);
-
+  const { selectedUser, loading } = useSelector(
+    (state: RootState) => state.users
+  );
 
   React.useEffect(() => {
-    dispatch(findUserById(parseInt(id)));
+    dispatch(findUserById(id));
   }, []);
 
   if (loading) return <div>Loading...</div>;
-
 
   const handleAddUser = () => {
     const data = {
@@ -56,7 +56,8 @@ const UpdateUserForm = () => {
       city: form.city,
     };
 
-    appDispatch(updateUser(data)).unwrap()
+    appDispatch(updateUser(data))
+      .unwrap()
       .then(() => {
         navigate("/");
       })
@@ -68,7 +69,7 @@ const UpdateUserForm = () => {
   return (
     <div>
       <form className="m-4 mx-6">
-        <div style={{ display: "flex", flexDirection: "row"}}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <div className="w-1/2">
             <TextField
               {...register("name", {
@@ -95,10 +96,12 @@ const UpdateUserForm = () => {
               required
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
-            {errors.email && <div className="text-danger">{errors.email.message}</div>}
+            {errors.email && (
+              <div className="text-danger">{errors.email.message}</div>
+            )}
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "row"}}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <div className="m-1">
             <TextField
               label="Username"

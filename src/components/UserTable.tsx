@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { User } from "../models/User";
 import Button from "@mui/material/Button";
+import DeleteUserModalForm from "./forms/DeleteUserModalForm";
 
 const UserTable = () => {
   const navigate = useNavigate();
@@ -61,9 +62,7 @@ const UserTable = () => {
                 </Button>
               </TableCell>
               <TableCell align="center">
-                <Button variant="contained" color="error">
-                  Delete
-                </Button>
+                <DeleteUserModalForm user={user} />
               </TableCell>
             </TableRow>
           ))}
