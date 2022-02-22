@@ -1,6 +1,6 @@
 import React from "react";
 
-const DeleteUser = () => {
+const DeleteUserForm = () => {
   return (
     <div>
       <h1>Delete User</h1>
@@ -8,4 +8,4 @@ const DeleteUser = () => {
   );
 };
 
-export default DeleteUser;
+export default DeleteUserForm;

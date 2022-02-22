@@ -1,7 +1,7 @@
 import Layout from "./Layout";
 import UserTable from "./UserTable";
-import AddUser from "./forms/AddUser";
-import UpdateUser from "./forms/UpdateUser";
-import DeleteUser from "./forms/DeleteUser";
+import AddUserForm from "./forms/AddUserForm";
+import UpdateUserForm from "./forms/UpdateUserForm";
+import DeleteUserForm from "./forms/DeleteUserForm";
 
-export { Layout, AddUser, UpdateUser, UserTable, DeleteUser };
+export { Layout, AddUserForm, UpdateUserForm, UserTable, DeleteUserForm };

@@ -1,6 +1,6 @@
 import React from "react";
 
-const UpdateUser = () => {
+const UpdateUserForm = () => {
   return (
     <div>
       <h1>Update User</h1>
@@ -8,4 +8,4 @@ const UpdateUser = () => {
   );
 };
 
-export default UpdateUser;
+export default UpdateUserForm;
