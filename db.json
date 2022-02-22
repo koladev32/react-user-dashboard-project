@@ -26,6 +26,18 @@
       "city": "Gwenborough",
       "phone": "1-463-123-4447",
       "website": "ramiro.info"
+    },
+    {
+      "name": "Kolawole",
+      "username": "koladev",
+      "email": "onaelmangabo@gmail.com",
+      "city": "69969696",
+      "id": 4
+    },
+    {
+      "name": "Kolawole",
+      "email": "kolawole.mangabo@transfapp.com",
+      "id": 5
     }
   ]
 }

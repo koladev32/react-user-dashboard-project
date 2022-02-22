@@ -55,7 +55,7 @@ const UserTable = () => {
                 <Button
                   variant="contained"
                   color="warning"
-                  onClick={() => navigate(`/update/${user.id}/`)}
+                  onClick={() => navigate(`/users/update/${user.id}/`)}
                 >
                   Edit
                 </Button>

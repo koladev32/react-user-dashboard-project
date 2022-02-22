@@ -1,10 +1,11 @@
 import React from "react";
+import { Layout, UpdateUserForm } from "../components";
 
 const UpdateUser = () => {
   return (
-    <div>
-      <h1>Update User</h1>
-    </div>
+    <Layout title="Update the user">
+      <UpdateUserForm />
+    </Layout>
   );
 };
 
