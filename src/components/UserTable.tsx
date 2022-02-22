@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../store/slices/user";
 import { RootState } from "../store";
@@ -13,6 +14,7 @@ import { User } from "../models/User";
 import Button from "@mui/material/Button";
 
 const UserTable = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { users, loading } = useSelector((state: RootState) => state.users);
@@ -50,7 +52,11 @@ const UserTable = () => {
               <TableCell align="center">{user.city}</TableCell>
               <TableCell align="center">{user.email}</TableCell>
               <TableCell align="center">
-                <Button variant="contained" color="warning">
+                <Button
+                  variant="contained"
+                  color="warning"
+                  onClick={() => navigate(`/update/${user.id}/`)}
+                >
                   Edit
                 </Button>
               </TableCell>
