@@ -29,7 +29,7 @@ const deleteUser = createAsyncThunk("users/deleteUser", async (user: User) => {
 const findUserById = createAsyncThunk(
   "users/findUserById",
   async (id: number) => {
-    const res = await axios.get(`/users/?id=${id}`);
+    const res = await axios.get(`${API_URL}/users/?id=${id}`);
     return res.data;
   }
 );
@@ -117,7 +117,8 @@ export const userSlice = createSlice({
       state.error = action.error.message || "Something went wrong";
     });
     builder.addCase(findUserById.fulfilled, (state, action) => {
-      state.selectedUser = action.payload;
+      state.selectedUser = action.payload.length ? action.payload[0] : null;
+      state.loading = false;
     });
 
     /*

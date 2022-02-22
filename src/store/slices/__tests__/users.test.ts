@@ -65,7 +65,7 @@ const getUserListResponse = [
 
 const mockNetWorkResponse = () => {
   const mock = new MockAdapter(axios);
-  mock.onGet(`/users/?id=${userId}`).reply(200, getUserResponse);
+  mock.onGet(`/users/?id=${userId}`).reply(200, [getUserResponse]);
   mock.onGet(`/users/`).reply(200, getUserListResponse);
   mock.onPost(`/users/`).reply(200, getCreateUserResponse);
   mock.onPut(`/users/${userId}`).reply(200, getUserUpdateResponse);
@@ -93,22 +93,22 @@ describe("User List state tests", () => {
     mockNetWorkResponse();
   });
 
-  it("Shoudl be able to fetch the user object", async () => {
+  it("Should be able to fetch the user object", async () => {
     const result = await store.dispatch(findUserById(userId));
-
     const user = result.payload;
 
     expect(result.type).toBe("users/findUserById/fulfilled");
-    expect(user).toEqual(getUserResponse);
+    expect(user).toEqual([getUserResponse]);
 
     const state = store.getState().users;
 
+    expect(state.loading).toBe(false);
     expect(state.selectedUser).toEqual(getUserResponse);
   });
 });
 
 /**
- * Testing the findUserById thunk
+ * Testing the fetchUsers thunk
  */
 
 describe("List all users", () => {

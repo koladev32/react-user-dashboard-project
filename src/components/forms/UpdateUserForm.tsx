@@ -5,8 +5,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { addUser } from "../../store/slices/user";
-import { useAppDispatch } from "../../store";
+import { addUser, findUserById, updateUser } from "../../store/slices/user";
+import { RootState, useAppDispatch } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
 
 const addUserSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -23,12 +24,11 @@ interface IAddUserFormProps {
 }
 
 const UpdateUserForm = () => {
-  let { id } = useParams<"id">();
+  const { id } = useParams();
   console.log(id);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
-  // Retrieving user from store
+  const dispatch = useDispatch();
+  const appDispatch = useAppDispatch();
   const [form, setForm] = React.useState<any>({});
   const {
     register,
@@ -37,16 +37,26 @@ const UpdateUserForm = () => {
   } = useForm<IAddUserFormProps>({
     resolver: yupResolver(addUserSchema),
   });
+  const { selectedUser, loading } = useSelector((state: RootState) => state.users);
+
+
+  React.useEffect(() => {
+    dispatch(findUserById(parseInt(id)));
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+
 
   const handleAddUser = () => {
     const data = {
+      id: selectedUser?.id,
       name: form.name,
       username: form.username,
       email: form.email,
       city: form.city,
     };
 
-    dispatch(addUser(data)).unwrap()
+    appDispatch(updateUser(data)).unwrap()
       .then(() => {
         navigate("/");
       })
@@ -65,7 +75,7 @@ const UpdateUserForm = () => {
                 required: true,
               })}
               label="Name"
-              value={form.name || ""}
+              value={form.name || selectedUser?.name}
               name="name"
               required
               onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -80,7 +90,7 @@ const UpdateUserForm = () => {
                 required: true,
               })}
               label="Email"
-              value={form.email || ""}
+              value={form.email || selectedUser?.email}
               name="email"
               required
               onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -96,7 +106,7 @@ const UpdateUserForm = () => {
                 required: true,
               })}
               name="username"
-              value={form.username || ""}
+              value={form.username || selectedUser?.username}
               onChange={(e) => setForm({ ...form, username: e.target.value })}
             />
           </div>
@@ -107,7 +117,7 @@ const UpdateUserForm = () => {
                 required: true,
               })}
               name="city"
-              value={form.city || ""}
+              value={form.city || selectedUser?.city}
               onChange={(e) => setForm({ ...form, city: e.target.value })}
             />
           </div>
@@ -118,7 +128,7 @@ const UpdateUserForm = () => {
             type="submit"
             onClick={handleSubmit(handleAddUser)}
           >
-            Create User
+            Update User
           </Button>
         </div>
       </form>
