@@ -103,7 +103,7 @@ describe("User List state tests", () => {
 
     const state = store.getState().users;
 
-    expect(state.users).toEqual([getUserResponse]);
+    expect(state.selectedUser).toEqual(getUserResponse);
   });
 });
 

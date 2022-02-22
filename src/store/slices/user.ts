@@ -38,12 +38,14 @@ type State = {
   users: User[];
   loading: boolean;
   error: string | null;
+  selectedUser: User | null;
 };
 
 export const initialState: State = {
   users: [],
   loading: false,
   error: null,
+  selectedUser: null,
 };
 
 export const userSlice = createSlice({
@@ -115,7 +117,7 @@ export const userSlice = createSlice({
       state.error = action.error.message || "Something went wrong";
     });
     builder.addCase(findUserById.fulfilled, (state, action) => {
-      state.users = [action.payload];
+      state.selectedUser = action.payload;
     });
 
     /*
