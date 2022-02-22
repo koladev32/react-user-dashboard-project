@@ -3,11 +3,10 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { User } from "../../models";
-import { TextField } from "@mui/material";
 import { useAppDispatch } from "../../store";
 import { deleteUser } from "../../store/slices/user";
 
@@ -23,25 +22,26 @@ const style = {
   p: 4,
 };
 
-function DeleteUserModalForm(props: {user:User}) {
-
+function DeleteUserModalForm(props: { user: User }) {
   const appDispatch = useAppDispatch();
   const [open, setOpen] = React.useState(false);
   const [userId, setUserId] = React.useState(0);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const {user} = props;
+  const { user } = props;
 
   const [errorMessage, setErrorMessage] = React.useState("");
 
   const handleDelete = () => {
-    appDispatch(deleteUser(user)).unwrap()
-    .then(() => {
-      setErrorMessage("");
-      handleClose();
-    }).catch(e => {
-      console.log(e);
-    });
+    appDispatch(deleteUser(user))
+      .unwrap()
+      .then(() => {
+        setErrorMessage("");
+        handleClose();
+      })
+      .catch((e) => {
+        setErrorMessage(e.message);
+      });
   };
 
   return (
@@ -66,20 +66,32 @@ function DeleteUserModalForm(props: {user:User}) {
               Do you want to delete the {user.name}?
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Please, enter the id {user.id} of the user to confirm the deletion.
+              Please, enter the id {user.id} of the user to confirm the
+              deletion.
             </Typography>
-            <input onChange={(e) => {
-              setUserId(parseInt(e.target.value));
-              if(e.target.value !== user.id?.toString()) {
-                setErrorMessage("Wrong id");
-              }
-            }}/>
-            {errorMessage && <Typography id="transition-modal-description" sx={{ mt: 2 }}>{errorMessage}</Typography>}
+            <input
+              onChange={(e) => {
+                setUserId(parseInt(e.target.value));
+                if (e.target.value !== user.id?.toString()) {
+                  setErrorMessage("Wrong id");
+                }
+              }}
+            />
+            {errorMessage && (
+              <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                {errorMessage}
+              </Typography>
+            )}
             <Stack direction="row" spacing={2}>
               <Button onClick={handleClose} variant="contained" color="warning">
                 Cancel
               </Button>
-              <Button disabled={!Boolean(userId) || userId !== user.id} onClick={handleDelete} variant="contained" color="error">
+              <Button
+                disabled={!Boolean(userId) || userId !== user.id}
+                onClick={handleDelete}
+                variant="contained"
+                color="error"
+              >
                 Delete
               </Button>
             </Stack>

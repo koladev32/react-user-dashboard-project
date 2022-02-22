@@ -50,10 +50,10 @@ const UpdateUserForm = () => {
   const handleAddUser = () => {
     const data = {
       id: selectedUser?.id,
-      name: form.name,
-      username: form.username,
-      email: form.email,
-      city: form.city,
+      name: form.name || selectedUser?.name,
+      username: form.username || selectedUser?.username,
+      email: form.email || selectedUser?.email,
+      city: form.city || selectedUser?.city,
     };
 
     appDispatch(updateUser(data))
@@ -78,7 +78,6 @@ const UpdateUserForm = () => {
               label="Name"
               value={form.name || selectedUser?.name}
               name="name"
-              required
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
             {errors.name && (
@@ -93,7 +92,6 @@ const UpdateUserForm = () => {
               label="Email"
               value={form.email || selectedUser?.email}
               name="email"
-              required
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
             {errors.email && (
