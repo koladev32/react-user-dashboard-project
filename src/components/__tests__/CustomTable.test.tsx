@@ -13,7 +13,15 @@ describe("renders Custom Tables", () => {
   let table: unknown;
   let rowsNumber = 0;
 
-  const tableHeaders = ["Id", "Name", "Username", "City", "Email", "Edit", "Delete"];
+  const tableHeaders = [
+    "Id",
+    "Name",
+    "Username",
+    "City",
+    "Email",
+    "Edit",
+    "Delete",
+  ];
 
   beforeAll(() => {
     const wrapper = render(<CustomTable users={getUserListResponse} />);
@@ -21,12 +29,12 @@ describe("renders Custom Tables", () => {
   });
 
   it("renders Table", () => {
-      /**
-       * Testing table headers
-       */
+    /**
+     * Testing table headers
+     */
     expect(table).toBeInTheDocument();
     tableHeaders.forEach((header) => {
-        expect(table).toHaveTextContent(header);
+      expect(table).toHaveTextContent(header);
     });
 
     /**
@@ -34,9 +42,9 @@ describe("renders Custom Tables", () => {
      */
 
     getUserListResponse.forEach((user) => {
-        const row = table.querySelector(`[data-testid="user-row-${user.id}"]`);
-        expect(row).toBeInTheDocument();
-        rowsNumber++;
+      const row = table.querySelector(`[data-testid="user-row-${user.id}"]`);
+      expect(row).toBeInTheDocument();
+      rowsNumber++;
     });
 
     /**

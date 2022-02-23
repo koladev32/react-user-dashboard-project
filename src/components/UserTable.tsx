@@ -14,9 +14,7 @@ const UserTable = () => {
   }, []);
 
   if (loading) return <div>Loading...</div>;
-  return (
-    <CustomTable users={users} />
-  );
+  return <CustomTable users={users} />;
 };
 
 export default UserTable;

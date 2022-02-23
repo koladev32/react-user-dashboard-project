@@ -15,8 +15,6 @@ const addUserSchema = yup
     username: yup.string(),
     city: yup.string(),
   })
-  .required();
-
 interface IAddUserFormProps {
   name: string;
   username: string;
@@ -35,6 +33,7 @@ const AddUserForm = () => {
   } = useForm<IAddUserFormProps>({
     resolver: yupResolver(addUserSchema),
   });
+  const [loading, setLoading] = React.useState(false);
 
   const handleAddUser = () => {
     const data = {
@@ -56,7 +55,7 @@ const AddUserForm = () => {
 
   return (
     <div>
-      <form className="m-4 mx-6">
+      <form className="m-4 mx-6" data-testid="user-add-form">
         <div style={{ display: "flex", flexDirection: "row" }}>
           <div className="w-1/2">
             <TextField
@@ -67,6 +66,7 @@ const AddUserForm = () => {
               value={form.name || ""}
               name="name"
               required
+              data-testid="name-input"
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
             {errors.name && (
@@ -82,6 +82,7 @@ const AddUserForm = () => {
               value={form.email || ""}
               name="email"
               required
+              data-testid="email-input"
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
             {errors.email && (
@@ -97,6 +98,7 @@ const AddUserForm = () => {
                 required: true,
               })}
               name="username"
+              data-testid="username-input"
               value={form.username || ""}
               onChange={(e) => setForm({ ...form, username: e.target.value })}
             />
@@ -108,6 +110,7 @@ const AddUserForm = () => {
                 required: true,
               })}
               name="city"
+              data-testid="city-input"
               value={form.city || ""}
               onChange={(e) => setForm({ ...form, city: e.target.value })}
             />
@@ -117,7 +120,15 @@ const AddUserForm = () => {
           <Button
             variant="contained"
             type="submit"
-            onClick={handleSubmit(handleAddUser)}
+            onClick={(e) => {
+              e.preventDefault();
+              setLoading(true);
+              handleSubmit(handleAddUser);
+            }}
+            data-testid="add-user-button"
+            disabled={
+              form.name === "" || form.email === "" || loading
+            }
           >
             Create User
           </Button>

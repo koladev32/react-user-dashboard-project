@@ -11,8 +11,7 @@ import Button from "@mui/material/Button";
 import { User } from "../../models";
 import { DeleteUserModalForm } from "..";
 
-const CustomTable = (props: {users: User[]}) => {
-
+const CustomTable = (props: { users: User[] }) => {
   const navigate = useNavigate();
 
   const { users } = props;
