@@ -6,14 +6,21 @@ import DeleteModal from "../DeleteModal";
 
 function DeleteUserModalForm(props: { user: User }) {
   const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
   const { user } = props;
+
+  React.useEffect(() => {
+    return () => {
+      setOpen(false);
+    }
+  }, []);
 
   return (
     <div>
       <Button onClick={() => setOpen(true)} variant="contained" color="error">
         Delete
       </Button>
-      <DeleteModal opened={open} user={user} />
+      <DeleteModal open={open} user={user} closeModal={handleClose} />
     </div>
   );
 }

@@ -7,13 +7,16 @@ import UserTable from "./table/UserTable";
 const UserTableList = () => {
   const dispatch = useDispatch();
 
-  const { users, loading } = useSelector((state: RootState) => state.users);
+  const { users } = useSelector((state: RootState) => state.users);
 
   React.useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  if (loading) return <div>Loading...</div>;
+  if (!users) {
+    return <div>No data for the moment</div>;
+  }
+
   return <UserTable users={users} />;
 };
 

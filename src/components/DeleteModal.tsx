@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -23,35 +24,24 @@ const style = {
   p: 4,
 };
 
-function DeleteModal(props: { user: User; opened: boolean }) {
-  const { user, opened } = props;
+function DeleteModal(props: { user: User; open: boolean; closeModal: () => void }) {
+  const { user, open, closeModal } = props;
   const appDispatch = useAppDispatch();
-  const [open, setOpen] = React.useState(false);
   const [userId, setUserId] = React.useState(0);
-  const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
-  let isMounted = true;
 
   const [errorMessage, setErrorMessage] = React.useState("");
-
-  React.useEffect(() => {
-    if(isMounted){
-        setOpen(opened);
-    }
-    return () => {
-        isMounted = false;
-    }
-  }, [opened]);
 
   const handleDelete = () => {
     appDispatch(deleteUser(user))
       .unwrap()
       .then(() => {
-        setErrorMessage("");
         toast.success("User deleted successfully", {
           position: toast.POSITION.TOP_CENTER,
         });
-        handleClose();
+        navigate("/");
+        closeModal();
       })
       .catch(() => {
         setErrorMessage("Error occured");
@@ -63,7 +53,7 @@ function DeleteModal(props: { user: User; opened: boolean }) {
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       open={open}
-      onClose={handleClose}
+      onClose={closeModal}
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
@@ -94,7 +84,7 @@ function DeleteModal(props: { user: User; opened: boolean }) {
           {errorMessage && <div className="text-red-500">{errorMessage}</div>}
           <Stack direction="row" spacing={2}>
             <Button
-              onClick={handleClose}
+              onClick={closeModal}
               variant="contained"
               color="warning"
               data-testid="user-cancel-button"
