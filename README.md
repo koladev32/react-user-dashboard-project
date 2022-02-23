@@ -33,7 +33,6 @@ yarn test
 
 You can find the tests at `src/components/__tests__` and `src/store/slices/__tests__`.
 
-
 ## Features
 
 [x] Add User
@@ -41,7 +40,7 @@ You can find the tests at `src/components/__tests__` and `src/store/slices/__tes
 [x] Delete User
 [x] List Users
 [x] Feedback pop-ups on each actions
-[ ] Filtering
+[X] Filtering by name
 
 ## What can be done to better the project? 
 
