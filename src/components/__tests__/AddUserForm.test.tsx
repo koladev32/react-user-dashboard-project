@@ -43,9 +43,8 @@ describe("renders Add User Form", () => {
      */
 
     await act(async () => {
-        await userEvent.click(submitButton);
+      await userEvent.click(submitButton);
     });
     expect(submitButton).toBeDisabled();
-    
   });
 });

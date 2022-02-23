@@ -8,13 +8,12 @@ import * as yup from "yup";
 import { addUser } from "../../store/slices/user";
 import { useAppDispatch } from "../../store";
 
-const addUserSchema = yup
-  .object({
-    name: yup.string().required("Name is required"),
-    email: yup.string().email().required("Email is required"),
-    username: yup.string(),
-    city: yup.string(),
-  })
+const addUserSchema = yup.object({
+  name: yup.string().required("Name is required"),
+  email: yup.string().email().required("Email is required"),
+  username: yup.string(),
+  city: yup.string(),
+});
 interface IAddUserFormProps {
   name: string;
   username: string;
@@ -126,9 +125,7 @@ const AddUserForm = () => {
               handleSubmit(handleAddUser);
             }}
             data-testid="add-user-button"
-            disabled={
-              form.name === "" || form.email === "" || loading
-            }
+            disabled={form.name === "" || form.email === "" || loading}
           >
             Create User
           </Button>
