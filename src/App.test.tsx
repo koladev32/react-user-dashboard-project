@@ -4,6 +4,6 @@ import App from "./App";
 
 test("renders learn react link", () => {
   render(<App />);
-  const titleElement = screen.getByText(/User Dashboard/i);
+  const titleElement = screen.getByText(/DASHBOARD/i);
   expect(titleElement).toBeInTheDocument();
 });
