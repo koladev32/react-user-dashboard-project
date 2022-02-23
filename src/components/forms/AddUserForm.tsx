@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -32,7 +31,7 @@ const AddUserForm = () => {
   } = useForm<IAddUserFormProps>({
     resolver: yupResolver(addUserSchema),
   });
-  const [loading, setLoading] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState<string>("");
 
   const handleAddUser = () => {
     const data = {
@@ -48,7 +47,7 @@ const AddUserForm = () => {
         navigate("/");
       })
       .catch(() => {
-        console.log("error");
+        setErrorMessage("Error adding user");
       });
   };
 
@@ -69,7 +68,7 @@ const AddUserForm = () => {
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
             {errors.name && (
-              <div className="text-danger">{errors.name.message}</div>
+              <div className="text-red-500">{errors.name.message}</div>
             )}
           </div>
           <div>
@@ -85,7 +84,7 @@ const AddUserForm = () => {
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
             {errors.email && (
-              <div className="text-danger">{errors.email.message}</div>
+              <div className="text-red-500">{errors.email.message}</div>
             )}
           </div>
         </div>
@@ -115,17 +114,14 @@ const AddUserForm = () => {
             />
           </div>
         </div>
+        {errorMessage && <div className="text-red-500">{errorMessage}</div>}
         <div className="mt-6">
           <Button
             variant="contained"
             type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              setLoading(true);
-              handleSubmit(handleAddUser);
-            }}
+            onClick={handleSubmit(handleAddUser)}
             data-testid="add-user-button"
-            disabled={form.name === "" || form.email === "" || loading}
+            disabled={form.name === "" || form.email === ""}
           >
             Create User
           </Button>

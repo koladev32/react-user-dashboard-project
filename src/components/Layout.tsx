@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+
 function Layout(props: { children: React.ReactNode; title: string }) {
   const sideBarLinks = [
     {
@@ -28,6 +30,7 @@ function Layout(props: { children: React.ReactNode; title: string }) {
         <h3 className="text-xl text-blue-600 font-bold">{props.title}</h3>
         {props.children}
       </div>
+      <ToastContainer />
     </div>
   );
 }
