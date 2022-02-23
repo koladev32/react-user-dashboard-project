@@ -28,7 +28,6 @@ function DeleteModal(props: { user: User; open: boolean; closeModal: () => void 
   const { user, open, closeModal } = props;
   const appDispatch = useAppDispatch();
   const [userId, setUserId] = React.useState(0);
-  const navigate = useNavigate();
 
 
   const [errorMessage, setErrorMessage] = React.useState("");
@@ -40,7 +39,6 @@ function DeleteModal(props: { user: User; open: boolean; closeModal: () => void 
         toast.success("User deleted successfully", {
           position: toast.POSITION.TOP_CENTER,
         });
-        navigate("/");
         closeModal();
       })
       .catch(() => {

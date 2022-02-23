@@ -8,7 +8,7 @@ describe("renders Delete Modal", () => {
   let modal: unknown;
   beforeAll(() => {
     const wrapper = render(
-      <DeleteModal user={getUserResponse} opened={true} />
+      <DeleteModal user={getUserResponse} open={true} />
     );
     modal = wrapper.getByTestId("delete-user-modal");
   });
