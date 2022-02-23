@@ -35,6 +35,7 @@ function DeleteModal(props: { user: User; opened: boolean }) {
     setOpen(opened);
   }, [opened]);
 
+
   const handleDelete = () => {
     appDispatch(deleteUser(user))
       .unwrap()
@@ -59,6 +60,7 @@ function DeleteModal(props: { user: User; opened: boolean }) {
         timeout: 500,
       }}
       data-testid="delete-user-modal"
+      disablePortal
     >
       <Fade in={open}>
         <Box sx={style}>
