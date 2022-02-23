@@ -1,11 +1,10 @@
-
 name: React Testing
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
@@ -16,6 +15,6 @@ jobs:
 
       - name: Installing dependencies
         run: yarn install
-      
+
       - name: Running Test
         run: yarn test

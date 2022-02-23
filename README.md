@@ -40,7 +40,7 @@ You can find the tests at `src/components/__tests__` and `src/store/slices/__tes
 - [x] Delete User
 - [x] List Users
 - [x] Feedback pop-ups on each actions
-- [X] Filtering by name
+- [x] Filtering by name
 
 ## What can be done to better the project?
 
