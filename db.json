@@ -1,14 +1,9 @@
 {
   "users": [
     {
-      "id": 2
-    },
-    {
-      "id": 3,
-      "name": "Clementine Bauch",
-      "username": "Samantha",
-      "email": "Nathan@yesenia.net",
-      "city": "Gwenborough"
+      "id": 2,
+      "name": "Kolawole",
+      "email": "testaa@yopmail.com"
     },
     {
       "name": "Kolawole",
@@ -31,6 +26,26 @@
       "name": "Kolawole",
       "email": "onaelmangabo@gmail.com",
       "id": 7
+    },
+    {
+      "name": "Development",
+      "email": "aafasfaf@gmail.com",
+      "id": 8
+    },
+    {
+      "name": "Development",
+      "email": "aafasfaf@gmail.com",
+      "id": 9
+    },
+    {
+      "name": "Kolawole",
+      "email": "kolawole.mangabo@transfapp.com",
+      "id": 10
+    },
+    {
+      "name": "Kolawole",
+      "email": "unicore.sarl@gmail.com",
+      "id": 11
     }
   ]
 }

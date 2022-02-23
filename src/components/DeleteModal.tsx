@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { useAppDispatch } from "../store";
 import { deleteUser } from "../store/slices/user";
 import { User } from "../models";
+import { toast } from 'react-toastify';
 
 const style = {
   position: "absolute" as "absolute",
@@ -40,6 +41,9 @@ function DeleteModal(props: { user: User; opened: boolean }) {
       .unwrap()
       .then(() => {
         setErrorMessage("");
+        toast.success("User deleted successfully", {
+            position: toast.POSITION.TOP_CENTER
+            });
         handleClose();
       })
       .catch(() => {

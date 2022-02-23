@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { findUserById, updateUser } from "../../store/slices/user";
 import { RootState, useAppDispatch } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from 'react-toastify';
 
 const addUserSchema = yup
   .object({
@@ -61,6 +62,9 @@ const UpdateUserForm = () => {
     appDispatch(updateUser(data))
       .unwrap()
       .then(() => {
+        toast.success("User updated", {
+          position: toast.POSITION.TOP_CENTER
+        });
         navigate("/");
       })
       .catch(() => {
