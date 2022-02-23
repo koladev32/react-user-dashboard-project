@@ -40,6 +40,8 @@ const UpdateUserForm = () => {
   const { selectedUser, loading } = useSelector(
     (state: RootState) => state.users
   );
+  const [errorMessage, setErrorMessage] = React.useState<string>("");
+
 
   React.useEffect(() => {
     dispatch(findUserById(id));
@@ -62,15 +64,15 @@ const UpdateUserForm = () => {
         navigate("/");
       })
       .catch(() => {
-        console.log("error");
+        setErrorMessage("Error updating user");
       });
   };
 
   return (
     <div>
-      <form className="m-4 mx-6">
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <div className="w-1/2">
+      <form className="flex flex-col space-y-4" data-testid="user-update-form">
+      <div className="flex flex-row space-x-4">
+          <div>
             <TextField
               {...register("name", {
                 required: true,
@@ -81,10 +83,10 @@ const UpdateUserForm = () => {
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
             {errors.name && (
-              <div className="text-danger">{errors.name.message}</div>
+              <div className="text-red-500">{errors.name.message}</div>
             )}
           </div>
-          <div className="w-1/2">
+          <div>
             <TextField
               {...register("email", {
                 required: true,
@@ -95,12 +97,12 @@ const UpdateUserForm = () => {
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
             {errors.email && (
-              <div className="text-danger">{errors.email.message}</div>
+              <div className="text-red-500">{errors.email.message}</div>
             )}
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <div className="m-1">
+        <div className="flex flex-row space-x-4">
+          <div>
             <TextField
               label="Username"
               {...register("username", {
@@ -111,7 +113,7 @@ const UpdateUserForm = () => {
               onChange={(e) => setForm({ ...form, username: e.target.value })}
             />
           </div>
-          <div className="m-1">
+          <div>
             <TextField
               label="City"
               {...register("city", {
@@ -123,7 +125,8 @@ const UpdateUserForm = () => {
             />
           </div>
         </div>
-        <div className="mt-6 text-center">
+        {errorMessage && <div className="text-red-500">{errorMessage}</div>}
+        <div className="mt-6">
           <Button
             variant="contained"
             type="submit"
