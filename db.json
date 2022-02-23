@@ -1,41 +1,14 @@
 {
   "users": [
     {
-      "id": 2,
-      "name": "Kolawole",
-      "email": "testaa@yopmail.com"
-    },
-    {
-      "name": "Kolawole",
-      "username": "koladev",
-      "email": "onaelmangabo@gmail.com",
-      "city": "69969696",
-      "id": 4
-    },
-    {
       "name": "Kolawole",
       "email": "kolawole.mangabo@transfapp.com",
       "id": 5
     },
     {
-      "name": "kljkljl",
-      "email": "onaelmangabo@gmail.com",
-      "id": 6
-    },
-    {
       "name": "Kolawole",
       "email": "onaelmangabo@gmail.com",
       "id": 7
-    },
-    {
-      "name": "Development",
-      "email": "aafasfaf@gmail.com",
-      "id": 8
-    },
-    {
-      "name": "Development",
-      "email": "aafasfaf@gmail.com",
-      "id": 9
     },
     {
       "name": "Kolawole",

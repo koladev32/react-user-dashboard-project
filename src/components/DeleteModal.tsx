@@ -30,10 +30,17 @@ function DeleteModal(props: { user: User; opened: boolean }) {
   const [userId, setUserId] = React.useState(0);
   const handleClose = () => setOpen(false);
 
+  let isMounted = true;
+
   const [errorMessage, setErrorMessage] = React.useState("");
 
   React.useEffect(() => {
-    setOpen(opened);
+    if(isMounted){
+        setOpen(opened);
+    }
+    return () => {
+        isMounted = false;
+    }
   }, [opened]);
 
   const handleDelete = () => {
