@@ -16,7 +16,7 @@ function Layout(props: { children: React.ReactNode; title: string }) {
   return (
     <Stack direction="row" spacing={4}>
       <div>
-        <h2>User Dashboard</h2>
+        <h2 style={{ marginLeft: 2}}>User Dashboard</h2>
         <ul>
           {sideBarLinks.map((link) => (
             <li key={link.label}>
