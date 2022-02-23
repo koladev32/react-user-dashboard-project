@@ -42,8 +42,8 @@ function DeleteModal(props: { user: User; opened: boolean }) {
         setErrorMessage("");
         handleClose();
       })
-      .catch((e) => {
-        setErrorMessage(e.message);
+      .catch(() => {
+        setErrorMessage("Error occured");
       });
   };
 
@@ -64,7 +64,7 @@ function DeleteModal(props: { user: User; opened: boolean }) {
       <Fade in={open}>
         <Box sx={style}>
           <Typography id="transition-modal-title" variant="h6" component="h2">
-            Do you want to delete the {user.name}?
+            Do you want to delete {user.name}?
           </Typography>
           <Typography id="transition-modal-description" sx={{ mt: 2 }}>
             Please, enter the id {user.id} of the user to confirm the deletion.
@@ -77,11 +77,11 @@ function DeleteModal(props: { user: User; opened: boolean }) {
               }
             }}
             data-testid="delete-user-modal-input"
+            className="my-2 border p-2"
+            placeholder="Enter id"
           />
           {errorMessage && (
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              {errorMessage}
-            </Typography>
+            <div className="text-red-500">{errorMessage}</div>
           )}
           <Stack direction="row" spacing={2}>
             <Button
