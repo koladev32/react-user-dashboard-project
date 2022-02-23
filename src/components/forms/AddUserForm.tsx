@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { addUser } from "../../store/slices/user";
 import { useAppDispatch } from "../../store";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 const addUserSchema = yup.object({
   name: yup.string().required("Name is required"),
@@ -46,7 +46,7 @@ const AddUserForm = () => {
       .unwrap()
       .then(() => {
         toast.success("New user added", {
-          position: toast.POSITION.TOP_CENTER
+          position: toast.POSITION.TOP_CENTER,
         });
         navigate("/");
       })
@@ -119,7 +119,14 @@ const AddUserForm = () => {
           </div>
         </div>
         {errorMessage && <div className="text-red-500">{errorMessage}</div>}
-        <div className="mt-6">
+        <div className="mt-6 space-x-4">
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={() => navigate("/")}
+          >
+            Cancel
+          </Button>
           <Button
             variant="contained"
             type="submit"

@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { findUserById, updateUser } from "../../store/slices/user";
 import { RootState, useAppDispatch } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const addUserSchema = yup
   .object({
@@ -43,7 +43,6 @@ const UpdateUserForm = () => {
   );
   const [errorMessage, setErrorMessage] = React.useState<string>("");
 
-
   React.useEffect(() => {
     dispatch(findUserById(id));
   }, []);
@@ -63,7 +62,7 @@ const UpdateUserForm = () => {
       .unwrap()
       .then(() => {
         toast.success("User updated", {
-          position: toast.POSITION.TOP_CENTER
+          position: toast.POSITION.TOP_CENTER,
         });
         navigate("/");
       })
@@ -75,7 +74,7 @@ const UpdateUserForm = () => {
   return (
     <div>
       <form className="flex flex-col space-y-4" data-testid="user-update-form">
-      <div className="flex flex-row space-x-4">
+        <div className="flex flex-row space-x-4">
           <div>
             <TextField
               {...register("name", {
@@ -130,13 +129,21 @@ const UpdateUserForm = () => {
           </div>
         </div>
         {errorMessage && <div className="text-red-500">{errorMessage}</div>}
-        <div className="mt-6">
+        <div className="mt-6 space-x-4">
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={() => navigate("/")}
+          >
+            Cancel
+          </Button>
           <Button
             variant="contained"
             type="submit"
             onClick={handleSubmit(handleAddUser)}
+            data-testid="update-user-button"
           >
-            Update User
+            Update
           </Button>
         </div>
       </form>
