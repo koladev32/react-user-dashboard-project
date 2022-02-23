@@ -25,7 +25,7 @@ function Layout(props: { children: React.ReactNode; title: string }) {
           ))}
         </ul>
       </div>
-      <div className="w-10/12 p-8 space-y-4">
+      <div className="flex flex-col w-10/12 p-8 space-y-4">
         <h3 className="text-xl text-blue-600 font-bold">{props.title}</h3>
         {props.children}
       </div>
