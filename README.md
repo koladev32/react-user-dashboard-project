@@ -35,19 +35,19 @@ You can find the tests at `src/components/__tests__` and `src/store/slices/__tes
 
 ## Features
 
-[x] Add User
-[x] Update User
-[x] Delete User
-[x] List Users
-[x] Feedback pop-ups on each actions
-[X] Filtering by name
+- [x] Add User
+- [x] Update User
+- [x] Delete User
+- [x] List Users
+- [x] Feedback pop-ups on each actions
+- [X] Filtering by name
 
 ## What can be done to better the project?
 
 Here are some ideas:
 
-[ ] Add more fields
-[ ] UI enhancement
-[ ] Introduce SWR for better fetching requests and caching
-[ ] Filtering by ID and City
-[ ] Use env vars for better environment managements
+- [ ] Add more fields
+- [ ] UI enhancement
+- [ ] Introduce SWR for better fetching requests and caching
+- [ ] Filtering by ID and City
+- [ ] Use env vars for better environment managements

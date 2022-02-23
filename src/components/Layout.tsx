@@ -15,11 +15,11 @@ function Layout(props: { children: React.ReactNode; title: string }) {
 
   return (
     <div className="flex flex-row h-screen">
-      <div className="w-2/12 p-8 bg-slate-700 text-white">
-        <h2 className="text-center text-xl font-bold">User Dashboard</h2>
+      <div className="w-2/12 p-8 bg-blue-600 h-full text-white fixed">
+        <h2 className="text-center text-xl font-bold">DASHBOARD</h2>
         <ul className="mt-8 space-y-2">
           {sideBarLinks.map((link) => (
-            <li className="hover:text-blue-600" key={link.label}>
+            <li className="hover:text-black" key={link.label}>
               <Link to={link.link}>{link.label}</Link>
             </li>
           ))}
