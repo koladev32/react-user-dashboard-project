@@ -132,11 +132,23 @@ export const userSlice = createSlice({
       state.loading = false;
       state.users = action.payload;
     });
-    builder.addCase(fetchUsers.rejected, (state, action) => {
+    builder.addCase(fetchUsers.rejected, (state) => {
       state.loading = false;
     });
   },
-  reducers: {},
+  reducers: {
+    sortUsersByName: (state, action) => {
+      if (action.payload === "asc") {
+        state.users = state.users.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+      } else if (action.payload === "desc") {
+        state.users = state.users.sort((a, b) =>
+          b.name.localeCompare(a.name)
+        );
+      }
+    }
+  },
 });
 
 export default userSlice.reducer;

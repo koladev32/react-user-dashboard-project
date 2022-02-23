@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,11 +11,36 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { User } from "../../models";
 import { DeleteUserModalForm } from "..";
-import { ArrowUpward } from "@mui/icons-material";
+import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
+import { userSlice } from "../../store/slices/user";
+import IconButton from '@mui/material/IconButton';
+
+enum SortingEnums {
+  ASC = "asc",
+  DESC = "desc"
+}
+
+enum SortingTypes {
+  ASC = "A-Z",
+  DESC = "Z-A"
+}
 
 const CustomTable = (props: { users: User[] }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [sortBy, setSortBy] = React.useState<SortingEnums>(SortingEnums.ASC);
+  const [sortType, setSortType] = React.useState<SortingTypes>(SortingTypes.ASC);
 
+  React.useEffect(() => {
+    if (sortBy === SortingEnums.ASC) {
+      setSortType(SortingTypes.ASC);
+    }
+    if (sortBy === SortingEnums.DESC) {
+      setSortType(SortingTypes.DESC);
+    }
+  }, [sortBy]);
+
+  dispatch(userSlice.actions.sortUsersByName(sortBy));
   const { users } = props;
 
   return (
@@ -24,8 +50,23 @@ const CustomTable = (props: { users: User[] }) => {
           <TableRow>
             <TableCell>Id</TableCell>
             <TableCell align="center">
-              <p>Name</p>
-              <ArrowUpward />
+              <div className="flex flex-row justify-center items-center">
+              <p>Name ({sortType})</p>
+              {
+                sortBy === SortingEnums.ASC && (
+                  <IconButton onClick={() => setSortBy(SortingEnums.DESC)}>
+                    <ArrowDownward style={{ width: 18, height: 18}}/>
+                  </IconButton>
+                )
+              }
+              {
+                sortBy === SortingEnums.DESC && (
+                  <IconButton onClick={() => setSortBy(SortingEnums.ASC)}>
+                    <ArrowUpward style={{ width: 18, height: 18}}/>
+                  </IconButton>
+                )
+              }
+              </div>
             </TableCell>
             <TableCell align="center">Username</TableCell>
             <TableCell align="center">City</TableCell>
