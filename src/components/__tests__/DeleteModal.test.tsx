@@ -7,9 +7,7 @@ import DeleteModal from "../DeleteModal";
 describe("renders Delete Modal", () => {
   let modal: unknown;
   beforeAll(() => {
-    const wrapper = render(
-      <DeleteModal user={getUserResponse} open={true} />
-    );
+    const wrapper = render(<DeleteModal user={getUserResponse} open={true} />);
     modal = wrapper.getByTestId("delete-user-modal");
   });
 

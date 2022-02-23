@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -24,11 +23,14 @@ const style = {
   p: 4,
 };
 
-function DeleteModal(props: { user: User; open: boolean; closeModal: () => void }) {
+function DeleteModal(props: {
+  user: User;
+  open: boolean;
+  closeModal: () => void;
+}) {
   const { user, open, closeModal } = props;
   const appDispatch = useAppDispatch();
   const [userId, setUserId] = React.useState(0);
-
 
   const [errorMessage, setErrorMessage] = React.useState("");
 

@@ -12,7 +12,7 @@ function DeleteUserModalForm(props: { user: User }) {
   React.useEffect(() => {
     return () => {
       setOpen(false);
-    }
+    };
   }, []);
 
   return (

@@ -139,15 +139,11 @@ export const userSlice = createSlice({
   reducers: {
     sortUsersByName: (state, action) => {
       if (action.payload === "asc") {
-        state.users = state.users.sort((a, b) =>
-          a.name.localeCompare(b.name)
-        );
+        state.users = state.users.sort((a, b) => a.name.localeCompare(b.name));
       } else if (action.payload === "desc") {
-        state.users = state.users.sort((a, b) =>
-          b.name.localeCompare(a.name)
-        );
+        state.users = state.users.sort((a, b) => b.name.localeCompare(a.name));
       }
-    }
+    },
   },
 });
 

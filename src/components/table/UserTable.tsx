@@ -13,23 +13,25 @@ import { User } from "../../models";
 import { DeleteUserModalForm } from "..";
 import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
 import { userSlice } from "../../store/slices/user";
-import IconButton from '@mui/material/IconButton';
+import IconButton from "@mui/material/IconButton";
 
 enum SortingEnums {
   ASC = "asc",
-  DESC = "desc"
+  DESC = "desc",
 }
 
 enum SortingTypes {
   ASC = "A-Z",
-  DESC = "Z-A"
+  DESC = "Z-A",
 }
 
 const CustomTable = (props: { users: User[] }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [sortBy, setSortBy] = React.useState<SortingEnums>(SortingEnums.ASC);
-  const [sortType, setSortType] = React.useState<SortingTypes>(SortingTypes.ASC);
+  const [sortType, setSortType] = React.useState<SortingTypes>(
+    SortingTypes.ASC
+  );
 
   React.useEffect(() => {
     if (sortBy === SortingEnums.ASC) {
@@ -51,21 +53,17 @@ const CustomTable = (props: { users: User[] }) => {
             <TableCell>Id</TableCell>
             <TableCell align="center">
               <div className="flex flex-row justify-center items-center">
-              <p>Name ({sortType})</p>
-              {
-                sortBy === SortingEnums.ASC && (
+                <p>Name ({sortType})</p>
+                {sortBy === SortingEnums.ASC && (
                   <IconButton onClick={() => setSortBy(SortingEnums.DESC)}>
-                    <ArrowDownward style={{ width: 18, height: 18}}/>
+                    <ArrowDownward style={{ width: 18, height: 18 }} />
                   </IconButton>
-                )
-              }
-              {
-                sortBy === SortingEnums.DESC && (
+                )}
+                {sortBy === SortingEnums.DESC && (
                   <IconButton onClick={() => setSortBy(SortingEnums.ASC)}>
-                    <ArrowUpward style={{ width: 18, height: 18}}/>
+                    <ArrowUpward style={{ width: 18, height: 18 }} />
                   </IconButton>
-                )
-              }
+                )}
               </div>
             </TableCell>
             <TableCell align="center">Username</TableCell>
