@@ -1,15 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PersonIcon from '@mui/icons-material/Person';
+import HomeIcon from '@mui/icons-material/Home';
 
 function Layout(props: { children: React.ReactNode; title: string }) {
   const sideBarLinks = [
     {
       label: "Home",
       link: "/",
+      icon: <HomeIcon />,
     },
     {
       label: "Add user",
       link: "/users/add",
+      icon: <PersonIcon />,
     },
   ];
 
@@ -19,7 +23,8 @@ function Layout(props: { children: React.ReactNode; title: string }) {
         <h2 className="text-center text-xl font-bold">DASHBOARD</h2>
         <ul className="mt-8 space-y-2">
           {sideBarLinks.map((link) => (
-            <li className="hover:text-black" key={link.label}>
+            <li className="hover:text-black flex items-center space-x-2" key={link.label}>
+              {link.icon}
               <Link to={link.link}>{link.label}</Link>
             </li>
           ))}
