@@ -11,7 +11,7 @@ const UserTableList = () => {
 
   React.useEffect(() => {
     dispatch(fetchUsers());
-  }, []);
+  }, [dispatch]);
 
   if (loading) return <div>Loading...</div>;
   return <UserTable users={users} />;
