@@ -1,10 +1,10 @@
 import React from "react";
-import { Layout, UserTable } from "../components";
+import { Layout, UserTableList } from "../components";
 
 const ListUsers = () => {
   return (
     <Layout title="List of users">
-      <UserTable />
+      <UserTableList />
     </Layout>
   );
 };

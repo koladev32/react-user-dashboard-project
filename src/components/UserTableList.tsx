@@ -2,9 +2,9 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../store/slices/user";
 import { RootState } from "../store";
-import CustomTable from "./table/CustomTable";
+import UserTable from "./table/UserTable";
 
-const UserTable = () => {
+const UserTableList = () => {
   const dispatch = useDispatch();
 
   const { users, loading } = useSelector((state: RootState) => state.users);
@@ -14,7 +14,7 @@ const UserTable = () => {
   }, []);
 
   if (loading) return <div>Loading...</div>;
-  return <CustomTable users={users} />;
+  return <UserTable users={users} />;
 };
 
-export default UserTable;
+export default UserTableList;
