@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Stack from "@mui/material/Stack";
 function Layout(props: { children: React.ReactNode; title: string }) {
   const sideBarLinks = [
     {
@@ -14,22 +13,22 @@ function Layout(props: { children: React.ReactNode; title: string }) {
   ];
 
   return (
-    <Stack direction="row" spacing={4}>
-      <div>
-        <h2 style={{ marginLeft: 2}}>User Dashboard</h2>
-        <ul>
+    <div className="flex flex-row h-screen">
+      <div className="w-2/12 p-8 bg-slate-700 text-white">
+        <h2 className="text-center text-xl font-bold">User Dashboard</h2>
+        <ul className="mt-8 space-y-2">
           {sideBarLinks.map((link) => (
-            <li key={link.label}>
+            <li className="hover:text-blue-600" key={link.label}>
               <Link to={link.link}>{link.label}</Link>
             </li>
           ))}
         </ul>
       </div>
-      <div style={{ width: "80%" }}>
-        <h3>{props.title}</h3>
+      <div className="w-10/12 p-8 space-y-4">
+        <h3 className="text-xl text-blue-600 font-bold">{props.title}</h3>
         {props.children}
       </div>
-    </Stack>
+    </div>
   );
 }
 

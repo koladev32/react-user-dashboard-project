@@ -54,9 +54,9 @@ const AddUserForm = () => {
 
   return (
     <div>
-      <form className="m-4 mx-6" data-testid="user-add-form">
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <div className="w-1/2">
+      <form className="flex flex-col space-y-4" data-testid="user-add-form">
+        <div className="flex flex-row space-x-4">
+          <div>
             <TextField
               {...register("name", {
                 required: true,
@@ -72,7 +72,7 @@ const AddUserForm = () => {
               <div className="text-danger">{errors.name.message}</div>
             )}
           </div>
-          <div className="w-1/2">
+          <div>
             <TextField
               {...register("email", {
                 required: true,
@@ -89,8 +89,8 @@ const AddUserForm = () => {
             )}
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <div className="m-1">
+        <div className="flex flex-row space-x-4">
+          <div>
             <TextField
               label="Username"
               {...register("username", {
@@ -102,7 +102,7 @@ const AddUserForm = () => {
               onChange={(e) => setForm({ ...form, username: e.target.value })}
             />
           </div>
-          <div className="m-1">
+          <div>
             <TextField
               label="City"
               {...register("city", {
@@ -115,7 +115,7 @@ const AddUserForm = () => {
             />
           </div>
         </div>
-        <div className="mt-6 text-center">
+        <div className="mt-6">
           <Button
             variant="contained"
             type="submit"
