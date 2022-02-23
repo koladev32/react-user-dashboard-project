@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { addUser } from "../../store/slices/user";
 import { useAppDispatch } from "../../store";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const addUserSchema = yup.object({
   name: yup.string().required("Name is required"),
