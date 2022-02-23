@@ -45,7 +45,7 @@ const UpdateUserForm = () => {
 
   React.useEffect(() => {
     dispatch(findUserById(id));
-  }, []);
+  }, [dispatch, id]);
 
   if (loading) return <div>Loading...</div>;
 

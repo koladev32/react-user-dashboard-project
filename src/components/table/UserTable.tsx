@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { User } from "../../models";
 import { DeleteUserModalForm } from "..";
+import { ArrowUpward } from "@mui/icons-material";
 
 const CustomTable = (props: { users: User[] }) => {
   const navigate = useNavigate();
@@ -22,7 +23,10 @@ const CustomTable = (props: { users: User[] }) => {
         <TableHead>
           <TableRow>
             <TableCell>Id</TableCell>
-            <TableCell align="center">Name</TableCell>
+            <TableCell align="center">
+              <p>Name</p>
+              <ArrowUpward />
+            </TableCell>
             <TableCell align="center">Username</TableCell>
             <TableCell align="center">City</TableCell>
             <TableCell align="center">Email</TableCell>
