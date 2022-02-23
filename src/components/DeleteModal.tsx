@@ -35,7 +35,6 @@ function DeleteModal(props: { user: User; opened: boolean }) {
     setOpen(opened);
   }, [opened]);
 
-
   const handleDelete = () => {
     appDispatch(deleteUser(user))
       .unwrap()
