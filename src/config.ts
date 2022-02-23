@@ -6,7 +6,7 @@ let API_URL: string;
 
 if (process.env.NODE_ENV === "production") {
   API_URL =
-    "https://my-json-server.typicode.com/koladev32/react-user-dashboard-project";
+    "https://fake-nodejs-server.herokuapp.com";
 } else if (process.env.NODE_ENV === "development") {
   API_URL = "http://localhost:3004";
 } else {
